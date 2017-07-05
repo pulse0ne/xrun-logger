@@ -1,3 +1,6 @@
+/**
+ * Simple application to log JACK xruns as they occur
+ */
 #include <jack/jack.h>
 #include <jack/statistics.h>
 #include <stdio.h>
@@ -11,6 +14,9 @@ struct tm *time_info;
 unsigned int xrun_count;
 char buffer[26];
 
+/**
+ * Callback to be executed on an xrun
+ */
 int on_xrun(void *arg) {
     (void) arg;
     // get the current time
@@ -36,6 +42,10 @@ int on_xrun(void *arg) {
     return 0;
 }
 
+/**
+ * Cleanup on JACK shutdown
+ * @param arg
+ */
 void on_jack_shutdown(void *arg) {
     (void) arg;
     pthread_mutex_destroy(&mx);
@@ -43,7 +53,7 @@ void on_jack_shutdown(void *arg) {
 }
 
 /**
- * Entry point
+ * Main
  * @param argc
  * @param argv
  * @return
