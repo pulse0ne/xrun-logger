@@ -8,7 +8,7 @@
 #include <unistd.h>
 
 jack_client_t *client;
-pthread_mutex_t mx;
+pthread_mutex_t mx PTHREAD_MUTEX_INITIALIZER;
 time_t timestamp;
 struct tm *time_info;
 unsigned int xrun_count;
